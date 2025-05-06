@@ -5,7 +5,7 @@ fetch('games.json')
 
         const container = document.querySelector('.g-container');
         container.innerHTML = '';
-        const gamecdn = "https://trose2012.github.io/Games/"
+        const gamecdn = "https://trose2012.github.io/cdn/"
 
         games.forEach(game => {
             const link = document.createElement('a');
