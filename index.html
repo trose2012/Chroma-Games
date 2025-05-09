@@ -19,6 +19,39 @@
 
   gtag('config', 'G-28CFMNM1C3');
 </script>
+<!-- Google Identity Services -->
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+
+<!-- Google Sign-In Button -->
+<div id="g_id_onload"
+     data-client_id="YOUR_GOOGLE_CLIENT_ID"
+     data-callback="handleCredentialResponse"
+     data-auto_prompt="false">
+</div>
+
+<div class="g_id_signin" data-type="standard"></div>
+
+<script>
+    // Allowed emails
+    const ALLOWED_EMAILS = ["allowed@example.com", "another@example.com"];
+
+    function handleCredentialResponse(response) {
+        const jwt = response.credential;
+        const user = parseJwt(jwt);
+
+        if (ALLOWED_EMAILS.includes(user.email)) {
+            document.body.innerHTML = `<h1>Welcome, ${user.name}!</h1>`;
+        } else {
+            document.body.innerHTML = `<h1>Access Denied</h1>`;
+        }
+    }
+
+    function parseJwt(token) {
+        const base64Url = token.split('.')[1];
+        const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+        return JSON.parse(atob(base64));
+    }
+</script>
 </head>
 
 <body>
